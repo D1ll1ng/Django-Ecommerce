@@ -73,6 +73,12 @@ h1,h2,h3,h4,h5,h6{
 
 }
 
+.cart-row .valuta{
+	display: inline-block;
+	padding-left: 7px;
+	font-size: 11px;
+}
+
 .quantity{
 	display: inline-block;
 	font-weight: 700;

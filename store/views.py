@@ -1,22 +1,24 @@
 from django.shortcuts import render
-from .models import *
+from .models import customerclass, productclass, orderclass,  orderitemclass, shippingaddressclass
+
 
 
 def store(request):
-    Products = Product.objects.all()
-    context = {'products': Products}
+    products = productclass.objects.all()
+    context = {'products': products}
     return render(request, 'store/store.html', context)
 
 
 def cart(request):
     if request.user.is_authenticated:
         customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        order, created = orderclass.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
     else:
         items = []
+        order = {'get_cart_total':0, 'get_cart_items':0}
 
-    context = {}
+    context = {'items':items, 'order':order}   
     return render(request, 'store/cart.html', context)
 
 
